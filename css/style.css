@@ -1,0 +1,23 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input {
+    display: block;
+    padding: 3px;
+}
+
+.lb {
+    margin-top: 1rem;
+}
+
+.btn-css {
+    margin-top: 1rem;
+}
+
+.select{
+    display: block;
+    padding: 4px;
+}
