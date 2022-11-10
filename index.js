@@ -12,14 +12,27 @@ const limiteI = 4734330.03;
 const limiteJ = 5425770;
 const limiteK = 6019594.89;
 */
+
+class Categoria{
+    constructor(tipo, limite){
+        this.tipo = tipo;
+        this.limite = limite;
+    }
+}
+
+const categoriaA = new Categoria("Categoria A", 748380.07);
+const categoriaB = new Categoria("Categoria B", 1112459.83);
+const categoriaC = new Categoria("Categoria C", 1557443.75);
+const categoriaD = new Categoria("Categoria D", 1934273.04);
+const categoriaE = new Categoria("Categoria E", 2277684.56);
+
+const categorias = [categoriaA, categoriaB, categoriaC, categoriaD, categoriaE];
+
+const nombresCategorias = categorias.map((cat) => cat.tipo);
+const limitesCategorias = categorias.map((lim) => lim.limite);
+
 let netoCompras = 0;
 let netoVentas = 0;
-
-
-
-const categorias = ['categoria A', 'categoria B', 'categoria C', 'categoria D'];
-
-const limites = [748380.07, 1112459.83, 1557443.75, 1934273.04, 2277684.56];
 
 const nombre = prompt("Ingrese su nombre");
 
@@ -44,19 +57,19 @@ class Cliente{
     }
     
     verificarCategoría(){
-        if(this.facturacion < limites[0]){
-            alert(`estás en la ${categorias[0]}`);
-            let margenFacturacion = this.calcularMargen(limites[0],this.facturacion);
+        if(this.facturacion < categoriaA.limite){
+            alert(`estás en la ${nombresCategorias[0]}`);
+            let margenFacturacion = Math.trunc(this.calcularMargen(limitesCategorias[0],this.facturacion));
             alert(`Te queda un margen de facturación para mantener la categoría actual de: ${margenFacturacion}`);
-        } else if(this.facturacion > limites[3] && this.facturacion < limites[4]){
+        } else if(this.facturacion > limitesCategorias[3] && this.facturacion < limitesCategorias[4]){
             alert("Estás en la última categoría");
-            let margenFacturacion = this.calcularMargen(limites[4],this.facturacion);
+            let margenFacturacion = Math.trunc(this.calcularMargen(limitesCategorias[4],this.facturacion));
             alert(`Te queda un margen de facturación para mantener la categoría actual de: ${margenFacturacion}`);
         } else{
-            for(let i=0; i<limites.length; i++){
-                if(this.facturacion>=limites[i] && this.facturacion<limites[i+1]){
-                    alert(`estás en la ${categorias[i+1]}`);
-                    let margenFacturacion = this.calcularMargen(limites[i+1],this.facturacion);
+            for(let i=0; i<nombresCategorias.length; i++){
+                if(this.facturacion>=limitesCategorias[i] && this.facturacion<limitesCategorias[i+1]){
+                    alert(`estás en la ${nombresCategorias[i+1]}`);
+                    let margenFacturacion = Math.trunc(this.calcularMargen(limitesCategorias[i+1],this.facturacion));
                     alert(`Te queda un margen de facturación para mantener la categoría actual de: ${margenFacturacion}`);
                 }
             }
@@ -64,7 +77,7 @@ class Cliente{
     }
 
     verificarRI(){
-        if(this.facturacion >= limites[4]){
+        if(this.facturacion >= limitesCategorias[4]){
             alert("Eres responsable inscripto o deberías pasar a ese régimen impositivo");
             netoCompras = prompt("Ingrese el importe NETO de IVA de sus compras para calcular el IVA crédito fiscal.");
             netoVentas = prompt("Ingrese el importe NETO de IVA de sus ventas para calcular el IVA débito fiscal.");
@@ -84,7 +97,6 @@ class Cliente{
     }
     
 }
-
 
 const cliente1 = new Cliente(nombre, condicionFiscal, facturacion);
 
