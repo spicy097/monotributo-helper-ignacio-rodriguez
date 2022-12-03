@@ -12,7 +12,6 @@ const limiteI = 4734330.03;
 const limiteJ = 5425770;
 const limiteK = 6019594.89;
 */
-
 class Categoria{
     constructor(tipo, limite){
         this.tipo = tipo;
@@ -78,6 +77,12 @@ class Cliente{
     }
     
     verificarCategoría(){
+        if(this.condicionFiscal === 'monotributo'){
+            Toastify({
+                text: "Categoría calculada.",
+                duration: 3000
+            }).showToast();
+        }
         if(this.facturacion < categoriaA.limite){
             informacionCateogiraCliente.innerText = `Estás en la ${nombresCategorias[0]}`;
             divDevolucion.append(informacionCateogiraCliente);
@@ -195,7 +200,6 @@ formularioCliente.onsubmit = (e) => {
 
         localStorage.setItem("datosCliente",JSON.stringify(datosCliente));
     }
-
 }
 
 const datosClienteStorage = JSON.parse(localStorage.getItem("datosCliente"));
@@ -205,3 +209,4 @@ if(datosClienteStorage.nombre !== "" || datosClienteStorage.facturacion !== ""){
     h3Storage.append(infoStorage);
     console.log(datosClienteStorage);
 }
+

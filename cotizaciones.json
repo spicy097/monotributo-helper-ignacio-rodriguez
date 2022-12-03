@@ -1,0 +1,17 @@
+[
+    {
+        "divisa": "dolar",
+        "TCoficial": 174.75,
+        "TCBlue": 312
+    },
+    {
+        "divisa": "euro",
+        "TCoficial": 181.5,
+        "TCBlue": 337
+    },
+    {
+        "divisa": "real",
+        "TCoficial": 32.2,
+        "TCBlue": 41
+    }
+]
