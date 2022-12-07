@@ -21,3 +21,26 @@ input {
     display: block;
     padding: 4px;
 }
+
+.card1{
+    margin-top: 1rem;
+    border: 1px solid;
+    padding: 1.2rem;
+    border-radius: 15px;
+    background-color: #116b9b;
+    font-weight: bold;
+}
+
+#form, #devolucion, #tipoDeCambio{
+    margin-top: 1rem;
+    border: 1px solid;
+    padding: 1.2rem;
+    border-radius: 15px;
+    background-color: #116b9b;
+    font-weight: bold;
+}
+
+body{
+    background-image: url(../img/img-bg.jpg);
+    background-repeat: no-repeat
+}

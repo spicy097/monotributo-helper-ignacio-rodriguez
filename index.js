@@ -1,17 +1,3 @@
-/* Estos son los límites de las categorías. Por ahora he puesto únicamente 5 en el array de límites.
-
-const limiteA = 748380.07;
-const limiteB = 1112459.83;
-const limiteC = 1557443.75;
-const limiteD = 1934273.04;
-const limiteE = 2277684.56;
-const limiteF = 2847105.70;
-const limiteG = 3416526.83;
-const limiteH = 4229985.60;
-const limiteI = 4734330.03;
-const limiteJ = 5425770;
-const limiteK = 6019594.89;
-*/
 class Categoria{
     constructor(tipo, limite){
         this.tipo = tipo;
@@ -32,12 +18,6 @@ const limitesCategorias = categorias.map((lim) => lim.limite);
 
 let netoCompras = 0;
 let netoVentas = 0;
-
-//const nombre = prompt("Ingrese su nombre");
-
-//const condicionFiscal = prompt("Ingrese su condición fiscal (monotributista o responsable inscripto)");
-
-//const facturacion = parseFloat(prompt("Ingrese el valor de lo facturado en el año hasta la fecha de esta consulta:"));
 
 //HTML
 const divDevolucion = document.getElementById("devolucion");
@@ -121,7 +101,7 @@ class Cliente{
     calcularIVA(){
         divDevolucion.append(formularioRI);
         
-        labelComprasRI.innerText = "Ingrese el importe NETO de IVA de sus comprar para calcular el IVA crédito fiscal:";
+        labelComprasRI.innerText = "Ingrese el importe NETO de IVA de sus compras para calcular el IVA crédito fiscal:";
         //IVA COMPRAS
         formularioRI.append(labelComprasRI);
         inputComprasRI.type = "number";
@@ -133,13 +113,13 @@ class Cliente{
         inputVentasRI.type = "number";
         formularioRI.append(inputVentasRI);
         inputSubmit.type = "submit";
-        inputSubmit.classList.add("btn", "btn-primary", "btn-css");
+        inputSubmit.classList.add("btn", "btn-light", "btn-css");
         formularioRI.append(inputSubmit);
 
         formularioRI.onsubmit = (e) => {
             e.preventDefault();
 
-            saldoTecnico.innerText = `Su Saldo Técnico mensual de IVA es el siguiente: $${(inputComprasRI.value * 0.21) - (inputVentasRI.value * 0.21)}`;
+            saldoTecnico.innerText = `Su Saldo Técnico mensual de IVA es el siguiente: $${(inputVentasRI.value * 0.21) - (inputComprasRI.value * 0.21)}`;
 
             divDevolucion.append(saldoTecnico);
 
@@ -150,15 +130,6 @@ class Cliente{
     
 }
 
-/*
-const cliente1 = new Cliente(nombre, condicionFiscal, facturacion);
-
-cliente1.verificarCategoría();
-cliente1.verificarRI();
-if(cliente1.condicionFiscal.toUpperCase() === "RESPONSABLE INSCRIPTO" && cliente1.facturacion >= limites[4]){
-    cliente1.calcularIVA();
-}
-*/
 //Eventos
 
 //Datos formulario
@@ -210,3 +181,20 @@ if(datosClienteStorage.nombre !== "" || datosClienteStorage.facturacion !== ""){
     console.log(datosClienteStorage);
 }
 
+const divTipoDeCambio = document.getElementById("tipoDeCambio");
+
+const buscarCotizaciones = async () => {
+    const cotizacionesFetch = await fetch('cotizaciones.json');
+    const cotizacionesJson = await cotizacionesFetch.json();
+    console.log(cotizacionesJson);
+
+    divTipoDeCambio.innerHTML = `<p>Tener en cuenta que si usted realiza una exportación, deberá emitir una factura E con los tipos de cambio oficiales al día de la fecha de emisión del comprobante. 
+    Los tipos de cambio son los siguientes:</p>`
+
+    cotizacionesJson.forEach((cotizacion) =>{
+        const {divisa, TCoficial} = cotizacion;
+        divTipoDeCambio.innerHTML += `<li>${divisa}: ${TCoficial}</li>`
+    })
+}
+
+buscarCotizaciones();
